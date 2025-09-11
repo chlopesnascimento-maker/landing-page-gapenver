@@ -130,8 +130,6 @@
         .kingdom-crest {
             filter: grayscale(30%);
             transition: all 0.4s ease;
-            transform: translateZ(0);
-            will-change: transform;
         }
         .kingdom-card h4 {
             transition: color 0.3s ease;
@@ -278,56 +276,6 @@
     border-radius: 0.5rem; /* Bordas arredondadas para combinar com o card */
     margin: 0.75rem -0.5rem -0.5rem; /* Ajusta margens para alinhar bem */
 }
-
-/* --- NOVOS ESTILOS PARA AS FAÍSCAS EXTERNAS DOS REINOS --- */
-
-/* 1. Define o invólucro como a nova área de posicionamento */
-.kingdom-card-wrapper {
-    position: relative;
-}
-
-/* 2. Ajusta as faíscas para ficarem atrás do card (z-index: 0) */
-.kingdom-card-wrapper .spark {
-    z-index: 0;
-}
-/* Apaga a regra antiga que não é mais necessária */
-.kingdom-card .spark {
-    z-index: auto; /* Reseta a regra antiga */
-}
-
-/* 3. Ativa as animações quando o mouse passar sobre o INVÓLUCRO */
-.kingdom-card-wrapper:hover .kingdom-card::before {
-    opacity: 0.6;
-    animation: pulseGlow 2.2s infinite linear;
-}
-.kingdom-card-wrapper:hover .spark {
-    animation-name: sparkle;
-    animation-timing-function: ease-out;
-    animation-iteration-count: infinite;
-}
-
-/* 4. Corrige as cores das faíscas para a nova estrutura */
-.kingdom-card-wrapper.gapenver .spark { background-color: #22c55e; }
-.kingdom-card-wrapper.saraver .spark { background-color: #fbbf24; }
-.kingdom-card-wrapper.corvusk .spark { background-color: #0076ed; }
-.kingdom-card-wrapper.lootrak .spark { background-color: #ffffff; }
-
-
-/* --- CORREÇÃO DA COR DO BRILHO DO CARD --- */
-/* Ensina o CSS a encontrar a classe de cor no novo invólucro */
-
-.kingdom-card-wrapper.gapenver .kingdom-card::before { 
-    background: linear-gradient(45deg, #16a34a, #15803d, #22c55e, #14532d); 
-}
-.kingdom-card-wrapper.saraver .kingdom-card::before { 
-    background: linear-gradient(45deg, #fde047, #f59e0b, #fbbf24, #d97706); 
-}
-.kingdom-card-wrapper.corvusk .kingdom-card::before { 
-    background: linear-gradient(45deg, #0076ed, #3b82f6, #60a5fa, #005cb3); 
-}
-.kingdom-card-wrapper.lootrak .kingdom-card::before { 
-    background: linear-gradient(45deg, #ffffff, #e5e7eb, #f9fafb, #d1d5db); 
-}
     </style>
 </head>
 <body class="text-gray-200">
@@ -377,44 +325,40 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     
                     <!-- Reino de Gapenver -->
-                     <div class="kingdom-card-wrapper gapenver">
-                            <div class="kingdom-card group">
-                                <img src="https://i.imgur.com/5qP53OJ.png" alt="Brasão de Gapenver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                                <h4 class="text-2xl font-bold text-white relative z-10">Gapenver</h4>
-                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Coração Verdejante. O último bastião da magia ancestral, onde a lealdade é forjada na natureza e nos laços de sangue.</p>
-                            </div>
-                            <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                        </div>
+                    <div class="kingdom-card group gapenver">
+                        <img src="https://i.imgur.com/5qP53OJ.png" alt="Brasão de Gapenver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                        <h4 class="text-2xl font-bold text-white relative z-10">Gapenver</h4>
+                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Coração Verdejante. O último bastião da magia ancestral, onde a lealdade é forjada na natureza e nos laços de sangue.</p>
+                        <!-- Faíscas -->
+                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                    </div>
 
                     <!-- Reino de Saraver -->
-                    <div class="kingdom-card-wrapper saraver">
-                            <div class="kingdom-card group">
-                                <img src="https://i.imgur.com/aU8Q8kV.png" alt="Brasão de Saraver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                                <h4 class="text-2xl font-bold text-white relative z-10">Saraver</h4>
-                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Império do Sol Nascente. Um reino de guerreiros orgulhosos e cidades douradas, endurecido pelas areias do deserto.</p>
-                            </div>
-                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                        </div>
+                    <div class="kingdom-card group saraver">
+                        <img src="https://i.imgur.com/aU8Q8kV.png" alt="Brasão de Saraver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                        <h4 class="text-2xl font-bold text-white relative z-10">Saraver</h4>
+                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Império do Sol Nascente. Um reino de guerreiros orgulhosos e cidades douradas, endurecido pelas areias do deserto.</p>
+                         <!-- Faíscas -->
+                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                    </div>
 
                     <!-- Reino de Corvusk -->
-                     <div class="kingdom-card-wrapper corvusk">
-                            <div class="kingdom-card group">
-                                <img src="https://i.imgur.com/icWVvHn.png" alt="Brasão de Corvusk" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                                <h4 class="text-2xl font-bold text-white relative z-10">Corvusk</h4>
-                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Ninho das Sombras. Mestres dos segredos e da astúcia, onde a informação é a arma mais afiada do que qualquer espada.</p>
-                            </div>
-                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                        </div>
+                    <div class="kingdom-card group corvusk">
+                        <img src="https://i.imgur.com/icWVvHn.png" alt="Brasão de Corvusk" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                        <h4 class="text-2xl font-bold text-white relative z-10">Corvusk</h4>
+                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Ninho das Sombras. Mestres dos segredos e da astúcia, onde a informação é a arma mais afiada do que qualquer espada.</p>
+                         <!-- Faíscas -->
+                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                    </div>
 
                     <!-- Reino de Lo'otrak -->
-                     <div class="kingdom-card-wrapper lootrak">
-                            <div class="kingdom-card group">
-                                <img src="https://i.imgur.com/5WmAmH3.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                                <h4 class="text-2xl font-bold text-white relative z-10">Lo'otrak</h4>
-                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">A Fúria Indomada. Uma nação forjada no fogo e na conquista, cujos clãs respondem apenas à força e à honra em batalha.</p>
-                            </div>
-                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                        </div>
+                    <div class="kingdom-card group lootrak">
+                        <img src="https://i.imgur.com/5WmAmH3.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                        <h4 class="text-2xl font-bold text-white relative z-10">Lo'otrak</h4>
+                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">A Fúria Indomada. Uma nação forjada no fogo e na conquista, cujos clãs respondem apenas à força e à honra em batalha.</p>
+                         <!-- Faíscas -->
+                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                    </div>
 
                 </div>
             </div>
