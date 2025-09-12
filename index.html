@@ -37,6 +37,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+        
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -53,7 +54,7 @@ body {
     background: linear-gradient(-45deg, #0d1a26, #111827, #0a140c, #112725);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
-}
+   }
         .hero-bg {
             background-image: url('https://i.imgur.com/tqecAno.jpeg');
             background-size: cover;
@@ -398,6 +399,25 @@ section.divider {
 
 .divider-autor::after {
     background-image: url('https://i.imgur.com/8vq4WqQ.png');
+}
+
+/* --- CORREÇÃO DO VAZAMENTO DAS PARTÍCULAS DO LIVRO --- */
+section#exclusivo {
+    overflow-x: hidden;
+}
+
+/* Para a seção dos reinos */
+section.divider-reinos {
+    overflow-x: hidden;
+}
+
+/* --- ESTILOS PARA O CABEÇALHO INTELIGENTE (REATIVADO) --- */
+#main-header {
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
 }
 
     </style>
@@ -793,7 +813,7 @@ function initSmartHeader() {
         window.onload = function() {
             startCountdown();
             initFaqAccordion();
-            //initSmartHeader(); // <-- BASTA ADICIONAR A CHAMADA DA NOVA FUNÇÃO AQUI
+            initSmartHeader(); // <-- BASTA ADICIONAR A CHAMADA DA NOVA FUNÇÃO AQUI
         };
     </script>
 
