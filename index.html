@@ -400,21 +400,12 @@ section.divider {
     background-image: url('https://i.imgur.com/8vq4WqQ.png');
 }
 
-/* --- ESTILOS PARA O CABEÇALHO INTELIGENTE --- */
-#main-header {
-    transition: transform 0.3s ease-in-out;
-}
-
-.header-hidden {
-    transform: translateY(-100%);
-}
-
     </style>
 </head>
 <body class="text-gray-200">
 
     <!-- CABEÇALHO FIXO -->
-    <header id="main-header" class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-lg">
+    <header id="main-header" class="sticky top-0 z-50 bg-gray-900 bg-opacity-80">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <h1 class="text-xl md:text-2xl font-bold text-white">GAPENVER</h1>
             <a href="#comprar" class="cta-button bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-amber-400">
@@ -714,7 +705,7 @@ section.divider {
         </footer>
     </main>
 
-    <script>
+<script>
         // Lógica do Contador de Urgência
         function startCountdown() {
             const countdownDate = new Date().getTime() + (10 * 24 * 60 * 60 * 1000); // 10 dias a partir de agora
@@ -766,9 +757,43 @@ section.divider {
             });
         }
 
+// --- VERSÃO OTIMIZADA E APENAS PARA MOBILE DO CABEÇALHO INTELIGENTE ---
+function initSmartHeader() {
+    // Só executa o código em telas com menos de 768px de largura (padrão para mobile)
+    if (window.innerWidth < 768) {
+        const header = document.getElementById("main-header");
+        if (!header) return;
+
+        let lastScrollTop = 0;
+        let isHeaderHidden = false; // Variável para guardar o estado atual
+
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Se está rolando para baixo
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                // Esconde o header APENAS SE ele já não estiver escondido
+                if (!isHeaderHidden) {
+                    header.classList.add("header-hidden");
+                    isHeaderHidden = true;
+                }
+            } else { // Se está rolando para cima
+                // Mostra o header APENAS SE ele estiver escondido
+                if (isHeaderHidden) {
+                    header.classList.remove("header-hidden");
+                    isHeaderHidden = false;
+                }
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+}
+
         window.onload = function() {
             startCountdown();
             initFaqAccordion();
+            //initSmartHeader(); // <-- BASTA ADICIONAR A CHAMADA DA NOVA FUNÇÃO AQUI
         };
     </script>
 
