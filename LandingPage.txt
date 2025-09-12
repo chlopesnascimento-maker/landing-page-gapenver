@@ -8,16 +8,16 @@
     <!-- SEO & Meta Tags Essenciais -->
     <meta name="description" content="Adquira a edição de lançamento de 'GAPENVER - E as Dimensões Invisíveis', um livro de fantasia medieval épico. Mergulhe em Aethelgard, um mundo de magia, reinos em conflito e heróis improváveis. Oferta exclusiva por tempo limitado!">
     <meta name="keywords" content="livro de fantasia, fantasia medieval, alta fantasia, GAPENVER, magia, aventura, livro épico, lançamento de livro">
-    <link rel="canonical" href="https://seusite.com.br"> <!-- SUBSTITUA pelo seu domínio oficial -->
+    <link rel="canonical" href="https://landing-page-gapenver.vercel.app/"> <!-- SUBSTITUA pelo seu domínio oficial -->
     
     <!-- Favicon (ícone da aba do navegador) -->
-    <link rel="icon" href="https://placehold.co/32x32/111827/fbbf24?text=G" type="image/png">
+    <link rel="icon" href="https://i.imgur.com/SucrVh9.png" type="image/png">
 
     <!-- Open Graph (para Facebook, Instagram, WhatsApp, TikTok, etc.) -->
     <meta property="og:title" content="GAPENVER - E as Dimensões Invisíveis | Livro de Fantasia Épica">
     <meta property="og:description" content="Mergulhe em uma saga onde reinos colidem e segredos ancestrais ameaçam destruir tudo. Adquira a edição de colecionador.">
     <meta property="og:image" content="https://i.imgur.com/ME2iOV1.png"> <!-- Imagem da capa do livro para a prévia -->
-    <meta property="og:url" content="https://seusite.com.br"> <!-- SUBSTITUA pelo seu domínio oficial -->
+    <meta property="og:url" content="https://landing-page-gapenver.vercel.app/"> <!-- SUBSTITUA pelo seu domínio oficial -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="GAPENVER - E as Dimensões Invisíveis">
     <meta property="og:locale" content="pt_BR">
@@ -35,14 +35,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: #111827; /* bg-gray-900 */
-        }
-        h1, h2, h3 {
-            font-family: 'Cinzel', serif;
-        }
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Aplicando o fundo ao corpo, ao main e a todas as seções para garantir */
+body, main, main > section {
+    background-color: transparent; /* Remove qualquer cor de fundo antiga */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(-45deg, #0d1a26, #111827, #0a140c, #112725);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
         .hero-bg {
             background-image: url('https://i.imgur.com/tqecAno.jpeg');
             background-size: cover;
@@ -130,6 +141,8 @@
         .kingdom-crest {
             filter: grayscale(30%);
             transition: all 0.4s ease;
+            transform: translateZ(0);
+            will-change: transform;
         }
         .kingdom-card h4 {
             transition: color 0.3s ease;
@@ -151,8 +164,8 @@
         .kingdom-card.gapenver .spark { background-color: #22c55e; }
         .kingdom-card.saraver::before { background: linear-gradient(45deg, #fde047, #f59e0b, #fbbf24, #d97706); }
         .kingdom-card.saraver .spark { background-color: #fbbf24; }
-        .kingdom-card.corvusk::before { background: linear-gradient(45deg, #0076ed, #3b82f6, #60a5fa, #005cb3); }
-        .kingdom-card.corvusk .spark { background-color: #0076ed; }
+        .kingdom-card.corvusk::before { background: linear-gradient(45deg, #1d33ff, #2a79f8, #0e1df1, #007df1); }
+        .kingdom-card.corvusk .spark { background-color: #1800ed; }
         .kingdom-card.lootrak::before { background: linear-gradient(45deg, #ffffff, #e5e7eb, #f9fafb, #d1d5db); }
         .kingdom-card.lootrak .spark { background-color: #ffffff; }
 
@@ -251,7 +264,7 @@
             }
             .kingdom-card.gapenver:hover h4 { color: #22c55e; }
             .kingdom-card.saraver:hover h4 { color: #f59e0b; }
-            .kingdom-card.corvusk:hover h4 { color: #0076ed; }
+            .kingdom-card.corvusk:hover h4 { color: #0010ed; }
             .kingdom-card.lootrak:hover h4 { color: #ffffff; }
             
             .testimonial-card:hover {
@@ -276,14 +289,134 @@
     border-radius: 0.5rem; /* Bordas arredondadas para combinar com o card */
     margin: 0.75rem -0.5rem -0.5rem; /* Ajusta margens para alinhar bem */
 }
+
+/* --- NOVOS ESTILOS PARA AS FAÍSCAS EXTERNAS DOS REINOS --- */
+
+/* 1. Define o invólucro como a nova área de posicionamento */
+.kingdom-card-wrapper {
+    position: relative;
+}
+
+/* 2. Ajusta as faíscas para ficarem atrás do card (z-index: 0) */
+.kingdom-card-wrapper .spark {
+    z-index: 0;
+}
+/* Apaga a regra antiga que não é mais necessária */
+.kingdom-card .spark {
+    z-index: auto; /* Reseta a regra antiga */
+}
+
+/* 3. Ativa as animações quando o mouse passar sobre o INVÓLUCRO */
+.kingdom-card-wrapper:hover .kingdom-card::before {
+    opacity: 0.6;
+    animation: pulseGlow 2.2s infinite linear;
+}
+.kingdom-card-wrapper:hover .spark {
+    animation-name: sparkle;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+}
+
+/* 4. Corrige as cores das faíscas para a nova estrutura */
+.kingdom-card-wrapper.gapenver .spark { background-color: #22c55e; }
+.kingdom-card-wrapper.saraver .spark { background-color: #fbbf24; }
+.kingdom-card-wrapper.corvusk .spark { background-color: #0076ed; }
+.kingdom-card-wrapper.lootrak .spark { background-color: #ffffff; }
+
+
+/* --- CORREÇÃO DA COR DO BRILHO DO CARD --- */
+/* Ensina o CSS a encontrar a classe de cor no novo invólucro */
+
+.kingdom-card-wrapper.gapenver .kingdom-card::before { 
+    background: linear-gradient(45deg, #16a34a, #15803d, #22c55e, #14532d); 
+}
+.kingdom-card-wrapper.saraver .kingdom-card::before { 
+    background: linear-gradient(45deg, #fde047, #f59e0b, #fbbf24, #d97706); 
+}
+.kingdom-card-wrapper.corvusk .kingdom-card::before { 
+    background: linear-gradient(45deg, #0076ed, #3b82f6, #60a5fa, #005cb3); 
+}
+.kingdom-card-wrapper.lootrak .kingdom-card::before { 
+    background: linear-gradient(45deg, #ffffff, #e5e7eb, #f9fafb, #d1d5db); 
+}
+
+
+/* --- ESTILOS PARA OS DIVISORES DE SEÇÃO --- */
+
+/* Prepara todas as seções para poderem ter uma paisagem */
+main > section {
+    position: relative;
+    padding-bottom: 150px; /* Adiciona espaço no final para a paisagem respirar */
+}
+
+/* --- ESTRUTURA COMPLETA PARA DIVISORES DE SEÇÃO --- */
+
+/* 1. Prepara qualquer seção com a classe .divider */
+section.divider {
+    position: relative;
+    padding-bottom: 120px; /* Espaço para a paisagem */
+}
+
+/* 2. Define o estilo base para todos os divisores */
+.divider::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% auto;
+    pointer-events: none;
+}
+
+/* 3. Estilo de "nevoeiro" para a seção seguinte */
+.section-fade-in {
+    background: linear-gradient(to bottom, 
+        #000000 0%,
+        rgba(7, 15, 9, 0.9) 15%,
+        rgba(17, 24, 39, 0) 30%
+    );
+}
+
+
+/* 4. CLASSES ESPECÍFICAS PARA CADA SILHUETA */
+/* Quando tiver as imagens novas, é só trocar as URLs aqui */
+
+.divider-reinos::after {
+    background-image: url('https://i.imgur.com/8vq4WqQ.png');
+}
+
+.divider-exclusivo::after {
+    background-image: url('https://i.imgur.com/8vq4WqQ.png');
+}
+
+.divider-testemunho::after {
+    background-image: url('https://i.imgur.com/8vq4WqQ.png');
+}
+
+.divider-autor::after {
+    background-image: url('https://i.imgur.com/8vq4WqQ.png');
+}
+
+/* --- ESTILOS PARA O CABEÇALHO INTELIGENTE --- */
+#main-header {
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+}
+
     </style>
 </head>
 <body class="text-gray-200">
 
     <!-- CABEÇALHO FIXO -->
-    <header class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-lg">
+    <header id="main-header" class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-lg">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold text-white">GAPENVER - E as Dimensões Invisíveis</h1>
+            <h1 class="text-xl md:text-2xl font-bold text-white">GAPENVER</h1>
             <a href="#comprar" class="cta-button bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-lg hover:bg-amber-400">
                 ADQUIRIR AGORA
             </a>
@@ -304,7 +437,7 @@
         </section>
 
         <!-- SEÇÃO 2: PROVOCAÇÃO E SINOPSE (INSTIGAÇÃO) -->
-        <section class="bg-gray-800 py-20 px-6">
+        <section class="py-20 px-6">
             <div class="container mx-auto text-center max-w-4xl">
                 <h3 class="text-3xl md:text-4xl font-bold text-amber-400 mb-6">Você ousa trilhar o caminho proibido?</h3>
                 <p class="text-lg md:text-xl leading-relaxed mb-10">
@@ -316,7 +449,7 @@
         </section>
 
         <!-- SEÇÃO 3: CONHEÇA OS REINOS (IMERSÃO) -->
-        <section class="bg-gray-800 py-20 px-6">
+        <section class="py-20 px-6 divider divider-reinos">
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Quatro Reinos, Um Destino.</h2>
@@ -325,47 +458,51 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     
                     <!-- Reino de Gapenver -->
-                    <div class="kingdom-card group gapenver">
-                        <img src="https://i.imgur.com/5qP53OJ.png" alt="Brasão de Gapenver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                        <h4 class="text-2xl font-bold text-white relative z-10">Gapenver</h4>
-                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Coração Verdejante. O último bastião da magia ancestral, onde a lealdade é forjada na natureza e nos laços de sangue.</p>
-                        <!-- Faíscas -->
-                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                    </div>
+                     <div class="kingdom-card-wrapper gapenver">
+                            <div class="kingdom-card group">
+                                <img src="https://i.imgur.com/5qP53OJ.png" alt="Brasão de Gapenver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                                <h4 class="text-2xl font-bold text-white relative z-10">Gapenver</h4>
+                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Coração Verdejante. O último bastião da magia ancestral, onde a lealdade é forjada na natureza e nos laços de sangue.</p>
+                            </div>
+                            <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                        </div>
 
                     <!-- Reino de Saraver -->
-                    <div class="kingdom-card group saraver">
-                        <img src="https://i.imgur.com/aU8Q8kV.png" alt="Brasão de Saraver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                        <h4 class="text-2xl font-bold text-white relative z-10">Saraver</h4>
-                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Império do Sol Nascente. Um reino de guerreiros orgulhosos e cidades douradas, endurecido pelas areias do deserto.</p>
-                         <!-- Faíscas -->
-                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                    </div>
+                    <div class="kingdom-card-wrapper saraver">
+                            <div class="kingdom-card group">
+                                <img src="https://i.imgur.com/aU8Q8kV.png" alt="Brasão de Saraver" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                                <h4 class="text-2xl font-bold text-white relative z-10">Saraver</h4>
+                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Império do Sol Nascente. Um reino de guerreiros orgulhosos e cidades douradas, endurecido pelas areias do deserto.</p>
+                            </div>
+                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                        </div>
 
                     <!-- Reino de Corvusk -->
-                    <div class="kingdom-card group corvusk">
-                        <img src="https://i.imgur.com/icWVvHn.png" alt="Brasão de Corvusk" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                        <h4 class="text-2xl font-bold text-white relative z-10">Corvusk</h4>
-                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Ninho das Sombras. Mestres dos segredos e da astúcia, onde a informação é a arma mais afiada do que qualquer espada.</p>
-                         <!-- Faíscas -->
-                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                    </div>
+                     <div class="kingdom-card-wrapper corvusk">
+                            <div class="kingdom-card group">
+                                <img src="https://i.imgur.com/icWVvHn.png" alt="Brasão de Corvusk" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                                <h4 class="text-2xl font-bold text-white relative z-10">Corvusk</h4>
+                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">O Ninho das Sombras. Mestres dos segredos e da astúcia, onde a informação é a arma mais afiada do que qualquer espada.</p>
+                            </div>
+                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                        </div>
 
                     <!-- Reino de Lo'otrak -->
-                    <div class="kingdom-card group lootrak">
-                        <img src="https://i.imgur.com/5WmAmH3.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
-                        <h4 class="text-2xl font-bold text-white relative z-10">Lo'otrak</h4>
-                        <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">A Fúria Indomada. Uma nação forjada no fogo e na conquista, cujos clãs respondem apenas à força e à honra em batalha.</p>
-                         <!-- Faíscas -->
-                        <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
-                    </div>
+                     <div class="kingdom-card-wrapper lootrak">
+                            <div class="kingdom-card group">
+                                <img src="https://i.imgur.com/5WmAmH3.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                                <h4 class="text-2xl font-bold text-white relative z-10">Lo'otrak</h4>
+                                <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">A Fúria Indomada. Uma nação forjada no fogo e na conquista, cujos clãs respondem apenas à força e à honra em batalha.</p>
+                            </div>
+                             <span class="spark"></span><span class="spark"></span><span class="spark"></span><span class="spark"></span>
+                        </div>
 
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO 4: EDIÇÃO EXCLUSIVA (EXCLUSIVIDADE E VALOR) -->
-        <section id="exclusivo" class="bg-gray-900 py-20 px-6">
+        <section id="exclusivo" class="py-20 px-6 divider divider-exclusivo section-fade-in">
             <div class="container mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Apenas para os verdadeiros aventureiros.</h2>
@@ -374,7 +511,7 @@
                 <div class="flex flex-col md:flex-row items-center gap-10">
                     <div class="md:w-1/2 flex justify-center items-center py-4">
                         <div class="book-container">
-                             <img src="https://i.imgur.com/ME2iOV1.png" alt="Capa do livro GAPENVER - E as Dimensões Invisíveis" class="book-cover rounded-lg shadow-2xl">
+                             <img src="https://i.imgur.com/ME2iOV1.png" alt="Capa do livro GAPENVER - E as Dimensões Invisíveis" class="w-3/4 md:w-96 book-cover rounded-lg shadow-2xl mx-auto">
                              <!-- Faíscas de Magia -->
                              <span class="spark"></span><span class="spark"></span>
                              <span class="spark"></span><span class="spark"></span>
@@ -410,7 +547,7 @@
         </section>
         
         <!-- SEÇÃO 5: PROVA SOCIAL (CONFIANÇA) -->
-        <section class="bg-gray-800 py-20 px-6">
+        <section class="py-20 px-6 divider divider-testemunho section-fade-in">
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Ecos dos Reinos</h2>
@@ -462,7 +599,7 @@
         </section>
         
         <!-- SEÇÃO 6: SOBRE O AUTOR (CONEXÃO) -->
-        <section id="autor" class="bg-gray-900 py-20 px-6">
+        <section id="autor" class="py-20 px-6 divider divider-autor section-fade-in">
             <div class="container mx-auto max-w-4xl">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Das Sombras da Imaginação</h2>
@@ -482,7 +619,7 @@
         </section>
 
         <!-- SEÇÃO 7: PERGUNTAS FREQUENTES (QUEBRA DE OBJEÇÕES) -->
-        <section id="faq" class="bg-gray-800 py-20 px-6">
+        <section id="faq" class="py-20 px-6 section-fade-in">
             <div class="container mx-auto max-w-3xl">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">O Grimório dos Curiosos</h2>
@@ -534,7 +671,7 @@
         </section>
 
         <!-- SEÇÃO 8: CTA FINAL E URGÊNCIA -->
-        <section id="comprar" class="bg-gray-900 py-20 px-6">
+        <section id="comprar" class="py-20 px-6">
             <div class="container mx-auto text-center max-w-3xl">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">O destino de Aethelgard aguarda.</h2>
                 <p class="text-xl text-amber-400 mb-8">A oferta de lançamento com todos os bônus termina em:</p>
@@ -571,7 +708,7 @@
         </section>
 
         <!-- RODAPÉ -->
-        <footer class="bg-gray-900 py-8 text-center text-gray-500">
+        <footer class="py-8 text-center text-gray-500">
             <p>&copy; 2025 GAPENVER. Todos os direitos reservados.</p>
             <p class="text-sm">Uma publicação da Editora Fantasia.</p>
         </footer>
