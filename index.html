@@ -389,6 +389,83 @@ section.divider {
 .divider-autor::after {
     background-image: url('https://i.imgur.com/929ipxF.png');
 }
+
+/* ======================================================================== */
+/* --- SISTEMA FINAL DE PARTÍCULAS (VAGALUMES ALEATÓRIOS) --- */
+/* ======================================================================== */
+
+/* 1. Prepara o body para conter os "véus" de partículas */
+body {
+    position: relative;
+    z-index: 0;
+}
+
+/* 2. Cria DOIS "véus" de partículas usando ::before e ::after */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Véu 1: Partículas mais próximas e um pouco mais rápidas */
+body::before {
+    background-image: 
+        radial-gradient(circle, rgba(251, 191, 36, 0.4) 1px, transparent 1px),
+        radial-gradient(circle, rgba(251, 191, 36, 0.3) 2px, transparent 2px),
+        radial-gradient(circle, rgba(251, 191, 36, 0.2) 3px, transparent 3px);
+    background-size: 
+        97px 83px,  /* Tamanhos não uniformes para quebrar o padrão */
+        127px 131px,
+        181px 193px;
+    background-position: 
+        10px 20px,
+        40px 50px,
+        70px 80px;
+    animation: 
+        moveAndFade 80s linear infinite,
+        moveAndFade 60s linear infinite,
+        moveAndFade 45s linear infinite;
+}
+
+/* Véu 2: Partículas mais distantes, lentas e sutis */
+body::after {
+    background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 
+        79px 89px,
+        137px 113px;
+    background-position: 
+        5px 15px,
+        25px 35px;
+    animation: 
+        moveAndFade 120s linear infinite, /* Duração mais longa = mais lento */
+        moveAndFade 95s linear infinite;
+}
+
+
+/* 3. Animação "vagalume" com opacidade reduzida */
+@keyframes moveAndFade {
+    0% {
+        transform: translateY(0);
+        opacity: 0; /* Começa invisível */
+    }
+    20% {
+        opacity: 0.5; /* MUDANÇA: Brilho máximo reduzido para 50% */
+    }
+    80% {
+        opacity: 0.5; /* Continua com brilho sutil */
+    }
+    100% {
+        transform: translateY(-100vh); /* Move 100% da altura da tela para cima */
+        opacity: 0; /* Desaparece no final */
+    }
+}
     </style>
 </head>
 <body class="text-gray-200">
@@ -433,7 +510,7 @@ section.divider {
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Quatro Reinos, Um Destino.</h2>
-                    <p class="text-lg text-gray-400 mt-2">Passe o mouse sobre os brasões e escolha sua aliança.</p>
+                    <p class="text-lg text-gray-400 mt-2">Passe o mouse ou clique sobre os brasões e escolha sua aliança.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     
