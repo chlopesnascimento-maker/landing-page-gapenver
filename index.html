@@ -95,6 +95,7 @@ body {
             opacity: 0;
             transition: opacity 0.4s ease-in-out;
         }
+
         @keyframes pulseGlow {
             0%, 100% {
                 opacity: 0.6;
@@ -332,94 +333,62 @@ body {
     background: linear-gradient(45deg, #16a34a, #15803d, #22c55e, #14532d); 
 }
 .kingdom-card-wrapper.saraver .kingdom-card::before { 
-    background: linear-gradient(45deg, #fde047, #f59e0b, #fbbf24, #d97706); 
+    background: linear-gradient(45deg, #ffd416, #f7bb54, #fbbf24, #d97706); 
 }
 .kingdom-card-wrapper.corvusk .kingdom-card::before { 
     background: linear-gradient(45deg, #0076ed, #3b82f6, #60a5fa, #005cb3); 
 }
 .kingdom-card-wrapper.lootrak .kingdom-card::before { 
-    background: linear-gradient(45deg, #ffffff, #e5e7eb, #f9fafb, #d1d5db); 
+    background: linear-gradient(45deg, #029991, #059b69, #f9fafb, #016d52); 
 }
 
 
 /* --- ESTILOS PARA OS DIVISORES DE SEÇÃO --- */
 
-/* Prepara todas as seções para poderem ter uma paisagem */
-main > section {
-    position: relative;
-    padding-bottom: 150px; /* Adiciona espaço no final para a paisagem respirar */
+/* 1. EFEITO DE "NEVOEIRO" PARA A SEÇÃO QUE VEM APÓS UM DIVISOR */
+.section-fade-in {
+    background: linear-gradient(to bottom, 
+        #000000 0%,
+        rgba(6, 12, 14, 0.9) 15%,
+        rgba(17, 24, 39, 0) 30%
+    );
 }
 
-/* --- ESTRUTURA COMPLETA PARA DIVISORES DE SEÇÃO --- */
-
-/* 1. Prepara qualquer seção com a classe .divider */
+/* 2. PREPARAÇÃO DA SEÇÃO QUE VAI TER UM DIVISOR NO FINAL */
 section.divider {
-    position: relative;
-    padding-bottom: 120px; /* Espaço para a paisagem */
+    position: relative;      /* Necessário para posicionar a silhueta */
+    padding-bottom: 120px;   /* Cria espaço para a silhueta não cobrir o conteúdo */
+    overflow: hidden;        /* A SOLUÇÃO: Contém TODOS os efeitos que possam vazar (partículas, brilhos, silhuetas) */
 }
 
-/* 2. Define o estilo base para todos os divisores */
+/* 3. ESTILO BASE DA SILHUETA */
 .divider::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 120px;
+    height: 320px;          /* Altura padrão da silhueta. Pode ser ajustada. */
     background-repeat: no-repeat;
     background-position: bottom center;
-    background-size: 100% auto;
+    background-size: cover; /* Faz a imagem preencher toda a largura */
     pointer-events: none;
 }
 
-/* 3. Estilo de "nevoeiro" para a seção seguinte */
-.section-fade-in {
-    background: linear-gradient(to bottom, 
-        #000000 0%,
-        rgba(7, 15, 9, 0.9) 15%,
-        rgba(17, 24, 39, 0) 30%
-    );
-}
-
-
-/* 4. CLASSES ESPECÍFICAS PARA CADA SILHUETA */
+/* 4. IMAGENS ESPECÍFICAS PARA CADA SILHUETA */
 /* Quando tiver as imagens novas, é só trocar as URLs aqui */
-
 .divider-reinos::after {
     background-image: url('https://i.imgur.com/8vq4WqQ.png');
 }
-
 .divider-exclusivo::after {
     background-image: url('https://i.imgur.com/8vq4WqQ.png');
 }
-
 .divider-testemunho::after {
     background-image: url('https://i.imgur.com/8vq4WqQ.png');
 }
-
 .divider-autor::after {
-    background-image: url('https://i.imgur.com/8vq4WqQ.png');
+    background-image: url('https://i.imgur.com/929ipxF.png');
 }
-
-/* --- CORREÇÃO DO VAZAMENTO DAS PARTÍCULAS DO LIVRO --- */
-section#exclusivo {
-    overflow-x: hidden;
-}
-
-/* Para a seção dos reinos */
-section.divider-reinos {
-    overflow-x: hidden;
-}
-
-/* --- ESTILOS PARA O CABEÇALHO INTELIGENTE (REATIVADO) --- */
-#main-header {
-    transition: transform 0.3s ease-in-out;
-}
-
-.header-hidden {
-    transform: translateY(-100%);
-}
-
     </style>
 </head>
 <body class="text-gray-200">
@@ -501,7 +470,7 @@ section.divider-reinos {
                     <!-- Reino de Lo'otrak -->
                      <div class="kingdom-card-wrapper lootrak">
                             <div class="kingdom-card group">
-                                <img src="https://i.imgur.com/5WmAmH3.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
+                                <img src="https://i.imgur.com/aheiS8O.png" alt="Brasão de Lo'otrak" class="kingdom-crest h-48 w-auto mx-auto mb-4 relative z-10">
                                 <h4 class="text-2xl font-bold text-white relative z-10">Lo'otrak</h4>
                                 <p class="text-gray-400 mt-2 text-sm px-2 relative z-10">A Fúria Indomada. Uma nação forjada no fogo e na conquista, cujos clãs respondem apenas à força e à honra em batalha.</p>
                             </div>
@@ -513,49 +482,52 @@ section.divider-reinos {
         </section>
 
         <!-- SEÇÃO 4: EDIÇÃO EXCLUSIVA (EXCLUSIVIDADE E VALOR) -->
-        <section id="exclusivo" class="py-20 px-6 divider divider-exclusivo section-fade-in">
-            <div class="container mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Apenas para os verdadeiros aventureiros.</h2>
-                    <p class="text-lg text-gray-400 mt-2">Adquira a Edição de Lançamento — disponível apenas na primeira tiragem.</p>
+      <section id="exclusivo" class="py-20 px-6 section-fade-in divider divider-exclusivo">
+    <div class="container mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Apenas para os verdadeiros aventureiros.</h2>
+            <p class="text-lg text-gray-400 mt-2">Adquira a Edição de Lançamento — disponível apenas na primeira tiragem.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+
+            <div class="md:w-5/12 flex justify-center items-center">
+                <div class="book-container w-full max-w-sm md:w-full md:max-w-md">
+                    <img src="https://i.imgur.com/ME2iOV1.png" alt="Capa do livro GAPENVER - E as Dimensões Invisíveis" class="w-full h-auto book-cover rounded-lg shadow-2xl">
+                    <span class="spark"></span><span class="spark"></span>
+                    <span class="spark"></span><span class="spark"></span>
+                    <span class="spark"></span><span class="spark"></span>
+                    <span class="spark"></span><span class="spark"></span>
                 </div>
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <div class="md:w-1/2 flex justify-center items-center py-4">
-                        <div class="book-container">
-                             <img src="https://i.imgur.com/ME2iOV1.png" alt="Capa do livro GAPENVER - E as Dimensões Invisíveis" class="w-3/4 md:w-96 book-cover rounded-lg shadow-2xl mx-auto">
-                             <!-- Faíscas de Magia -->
-                             <span class="spark"></span><span class="spark"></span>
-                             <span class="spark"></span><span class="spark"></span>
-                             <span class="spark"></span><span class="spark"></span>
-                             <span class="spark"></span><span class="spark"></span>
-                        </div>
+            </div>
+            
+            <div class="md:w-7/12 space-y-6">
+                <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
+                    <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path d="M9 12l-2 5h10l-2-5"></path></svg>
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Capa Dura com Arte Metalizada</h4>
+                        <p class="text-gray-400">Uma edição de colecionador que se destacará em sua estante.</p>
                     </div>
-                    <div class="md:w-1/2 space-y-6">
-                        <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
-                            <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path d="M9 12l-2 5h10l-2-5"></path></svg>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">Capa Dura com Arte Metalizada</h4>
-                                <p class="text-gray-400">Uma edição de colecionador que se destacará em sua estante.</p>
-                            </div>
-                        </div>
-                        <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
-                            <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L10 6.5m0 0l4.553-2.276A1 1 0 0116 5.118v10.764a1 1 0 01-1.447.894L9 14.5m0-8l6 3m-6 5l6-3"></path></svg>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">Mapa dos Sete Reinos em Pergaminho</h4>
-                                <p class="text-gray-400">Explore Aethelgard com um mapa detalhado, incluso apenas nesta edição.</p>
-                            </div>
-                        </div>
-                        <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
-                             <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">Capítulo Bônus Exclusivo</h4>
-                                <p class="text-gray-400">Descubra o destino de um personagem secundário em um capítulo que não estará nas edições futuras.</p>
-                            </div>
-                        </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
+                    <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L10 6.5m0 0l4.553-2.276A1 1 0 0116 5.118v10.764a1 1 0 01-1.447.894L9 14.5m0-8l6 3m-6 5l6-3"></path></svg>
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Mapa dos Sete Reinos em Pergaminho</h4>
+                        <p class="text-gray-400">Explore Aethelgard com um mapa detalhado, incluso apenas nesta edição.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-start gap-4">
+                     <svg class="w-8 h-8 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Capítulo Bônus Exclusivo</h4>
+                        <p class="text-gray-400">Descubra o destino de um personagem secundário em um capítulo que não estará nas edições futuras.</p>
                     </div>
                 </div>
             </div>
-        </section>
+
+        </div>
+    </div>
+</section>
         
         <!-- SEÇÃO 5: PROVA SOCIAL (CONFIANÇA) -->
         <section class="py-20 px-6 divider divider-testemunho section-fade-in">
@@ -601,7 +573,7 @@ section.divider-reinos {
                             <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                             <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         </div>
-                        <p class="text-gray-300 italic mb-6">"Uma aventura épica que te faz sentir cada batalha, cada feitiço e cada sacrifício. Um clássico instantâneo para qualquer fã do gênero."</p>
+                        <p class="text-gray-300 italic mb-6">"Uma aventura épica que te faz sentir cada batalha, cada luta e cada sacrifício. Uma pegada contemporânea que mantém o medieval feita para qualquer fã do gênero."</p>
                         <p class="font-bold text-white">- J. Valerius, Crítico Literário</p>
                     </div>
 
@@ -618,10 +590,10 @@ section.divider-reinos {
                 </div>
                 <div class="flex flex-col md:flex-row items-center gap-10 bg-gray-800 p-8 rounded-lg border border-gray-700">
                     <div class="md:w-1/3 flex-shrink-0">
-                        <img src="https://placehold.co/400x400/111827/4b5563?text=Sua+Foto" alt="Foto do Autor" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover border-4 border-gray-700">
+                        <img src="https://i.imgur.com/SmwtWn2.png" alt="Foto do Autor" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover border-4 border-gray-700">
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-amber-400 mb-4">Seu Nome Aqui</h3>
+                        <h3 class="text-2xl font-bold text-amber-400 mb-4">Carlos H. Lopes</h3>
                         <p class="text-gray-300 mb-4">"Desde criança, eu me perco em mundos de fantasia. Dragões, magos e reinos esquecidos sempre foram mais reais para mim do que o mundo do lado de fora da janela. Aethelgard nasceu dessa paixão, um lugar que eu precisava visitar e, portanto, precisei criar."</p>
                         <p class="text-gray-300">"GAPENVER não é apenas uma história sobre magia, mas sobre a centelha de esperança que existe nos lugares mais sombrios e sobre como pessoas comuns podem ser forjadas em lendas. Espero que você se perca nestas páginas tanto quanto eu me perdi ao escrevê-las."</p>
                     </div>
@@ -696,10 +668,10 @@ section.divider-reinos {
                 </div>
 
                 <p class="text-lg text-gray-300 mb-2">De <span class="line-through">R$ 99,90</span> por apenas:</p>
-                <p class="text-5xl font-bold text-white mb-8">R$ 69,90</p>
+                <p class="text-5xl font-bold text-white mb-8">R$ 79,99</p>
                 
                 <a href="#" class="cta-button w-full md:w-auto inline-block bg-green-600 text-white font-bold py-4 px-12 text-xl rounded-lg hover:bg-green-500" style="box-shadow: 0 4px 15px 0 rgba(16, 185, 129, 0.4);">
-                    Garantir Meu Exemplar Exclusivo Agora!
+                    GARANTIR EXCLUSIVO AGORA!
                 </a>
                 <p class="text-sm text-gray-500 mt-4">Compra segura e entrega para todo o Brasil.</p>
 
@@ -719,7 +691,7 @@ section.divider-reinos {
         </section>
 
         <!-- RODAPÉ -->
-        <footer class="py-8 text-center text-gray-500">
+        <footer class="py-8 text-center text-gray-500 bg-black">
             <p>&copy; 2025 GAPENVER. Todos os direitos reservados.</p>
             <p class="text-sm">Uma publicação da Editora Fantasia.</p>
         </footer>
