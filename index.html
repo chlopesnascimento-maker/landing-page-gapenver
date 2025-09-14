@@ -466,6 +466,13 @@ body::after {
         opacity: 0; /* Desaparece no final */
     }
 }
+/* 2. Regra Específica para Sobrescrever no Mobile */
+@media (max-width: 768px) {
+    .hero-bg {
+        background-size: 1500px;      /* O zoom de 1500px que você queria no celular */
+        background-attachment: scroll;/* Remove o parallax para garantir a fluidez no celular */
+    }
+}
     </style>
 </head>
 <body class="text-gray-200">
@@ -486,7 +493,7 @@ body::after {
             <div class="bg-black bg-opacity-60 p-8 rounded-xl max-w-3xl fade-in">
                 <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-4">E se pudéssemos extrair poderes de outras dimensões...</h2>
                 <p class="text-xl md:text-3xl font-light mb-8">...mas o custo disso colacasse a vida de todos em perigo?</p>
-                <p class="text-base md:text-lg mb-8">Mergulhe em uma saga onde reinos colidem, heróis improváveis se erguem e segredos ancestrais ameaçam destruir tudo o que existe. A verdade não é o que parece.</p>
+                <p class="text-base md:text-lg mb-8">Mergulhe com Eryntor em uma saga onde reinos colidem, heróis improváveis se erguem e segredos ancestrais ameaçam destruir tudo o que existe. A verdade não é o que parece.</p>
                 <a href="#exclusivo" class="cta-button bg-amber-500 text-gray-900 font-bold py-4 px-10 text-lg rounded-lg hover:bg-amber-400">
                     Desvende o Segredo
                 </a>
